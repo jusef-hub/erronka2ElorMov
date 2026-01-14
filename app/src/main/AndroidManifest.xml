@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ElorMov">
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.perfila.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.home.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

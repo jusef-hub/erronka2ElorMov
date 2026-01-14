@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- SHADOW / OUTER GLOW -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="#00000000"/> <!-- transparente -->
+            <size android:width="128dp" android:height="128dp"/>
+            <stroke
+                android:width="4dp"
+                android:color="#4000BDC7"/> <!-- sombra suave primary -->
+        </shape>
+    </item>
+
+    <!-- GRADIENT BORDER -->
+    <item android:left="2dp" android:top="2dp" android:right="2dp" android:bottom="2dp">
+        <shape android:shape="oval">
+            <gradient
+                android:startColor="@color/primary"
+                android:endColor="@color/success"
+                android:angle="45"/>
+        </shape>
+    </item>
+
+    <!-- FONDO INTERNO -->
+    <item android:left="6dp" android:top="6dp" android:right="6dp" android:bottom="6dp">
+        <shape android:shape="oval">
+            <solid android:color="@color/surface"/>
+        </shape>
+    </item>
+
+</layer-list>
