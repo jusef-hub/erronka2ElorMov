@@ -6,7 +6,7 @@
         android:title="@string/schedule"
         android:icon="@drawable/ic_schedule"/>
     <item
-        android:id="@+id/studentsTeacherFragment"
+        android:id="@+id/studTeachFragment"
         android:title="@string/students"
         android:icon="@drawable/ic_techers_students"/>
     <item
