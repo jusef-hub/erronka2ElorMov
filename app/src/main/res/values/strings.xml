@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ElorMov</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="schedule">horarios</string>
+    <string name="students">Alumnos</string>
+    <string name="teachers">Profesores</string>
+    <string name="meeting">Reuniones</string>
+    <string name="profile">Perfil</string>
 </resources>
