@@ -8,17 +8,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.core.DataStore
-import androidx.datastore.dataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.lifecycleScope
 import com.example.elormov.databinding.FragmentProfileBinding
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
@@ -32,8 +27,8 @@ class ProfileFragment : Fragment() {
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		observeDarkMode()
 		initListeners()
+		observeDarkMode()
 	}
 
 	private fun observeDarkMode() {
@@ -45,7 +40,6 @@ class ProfileFragment : Fragment() {
 					// Evita que el listener se dispare solo
 					binding.swDarkMode.setOnCheckedChangeListener(null)
 					binding.swDarkMode.isChecked = isDarkMode
-					initListeners()
 
 					AppCompatDelegate.setDefaultNightMode(
 						if (isDarkMode)
@@ -53,34 +47,23 @@ class ProfileFragment : Fragment() {
 						else
 							AppCompatDelegate.MODE_NIGHT_NO
 					)
+
+					initListeners()
 				}
 		}
 	}
 
 	private fun initListeners() {
 		binding.swDarkMode.setOnCheckedChangeListener { buttonView, isChecked ->
-			if (isChecked) {
-				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-				CoroutineScope(Dispatchers.IO).launch {
-					saveDarkMode("DarkMode",isChecked)
-				}
-			} else {
-				AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+			viewLifecycleOwner.lifecycleScope.launch {
+				saveDarkMode(isChecked)
 			}
 		}
 	}
 
-	private suspend fun saveDarkMode(name: String, value: Boolean) {
+	private suspend fun saveDarkMode(value: Boolean) {
 		requireContext().dataStore.edit {
-			it[booleanPreferencesKey(name)] = value
-		}
-	}
-
-	private fun getDarkMode(): Flow<SettingsValue> {
-		return requireContext().dataStore.data.map {
-			SettingsValue(
-				it[booleanPreferencesKey("DarkMode")] ?: false
-			)
+			it[DARK_MODE_KEY] = value
 		}
 	}
 
@@ -91,5 +74,10 @@ class ProfileFragment : Fragment() {
 		// Inflate the layout for this fragment
 		_binding = FragmentProfileBinding.inflate(layoutInflater, container, false)
 		return binding.root
+	}
+
+	override fun onDestroyView() {
+		super.onDestroyView()
+		_binding = null
 	}
 }
