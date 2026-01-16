@@ -30,10 +30,15 @@ class MainActivity : AppCompatActivity() {
 			v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
 			insets
 		}
+		//Deja la imagen del logo a la escala necesaria al iniciar la animación
+		binding.ivLogo.scaleY = 0.1f
+		binding.ivLogo.scaleX = 0.1f
+
 		initUI()
+		//Espera 0,5 segundos para iniciar la animacion
 		binding.ivLogo.postDelayed({
 			startAnimation()
-		}, 1000)
+		}, 500)
 	}
 	private fun initUI() {
 		binding.btnLogin.setOnClickListener {
@@ -49,8 +54,8 @@ class MainActivity : AppCompatActivity() {
 		rotation.duration = 2000
 
 		// Escalar (hacer más grande y pequeño)
-		val scaleX = ObjectAnimator.ofFloat(binding.ivLogo, View.SCALE_X, 1f, 1.5f, 1f)
-		val scaleY = ObjectAnimator.ofFloat(binding.ivLogo, View.SCALE_Y, 1f, 1.5f, 1f)
+		val scaleX = ObjectAnimator.ofFloat(binding.ivLogo, View.SCALE_X, 0.1f, 1f)
+		val scaleY = ObjectAnimator.ofFloat(binding.ivLogo, View.SCALE_Y, 0.1f, 1f)
 		scaleX.duration = 2000
 		scaleY.duration = 2000
 
