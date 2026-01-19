@@ -9,9 +9,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.setupWithNavController
 import com.example.elormov.R
 import com.example.elormov.databinding.ActivityMainBinding
 import com.example.elormov.ui.home.HomeActivity
@@ -34,13 +31,14 @@ class MainActivity : AppCompatActivity() {
 		binding.ivLogo.scaleY = 0.1f
 		binding.ivLogo.scaleX = 0.1f
 
-		initUI()
+		initListeners()
+
 		//Espera 0,5 segundos para iniciar la animacion
 		binding.ivLogo.postDelayed({
 			startAnimation()
 		}, 500)
 	}
-	private fun initUI() {
+	private fun initListeners() {
 		binding.btnLogin.setOnClickListener {
 			val intent = Intent(this, HomeActivity::class.java)
 			startActivity(intent)
@@ -49,16 +47,17 @@ class MainActivity : AppCompatActivity() {
 	}
 
 	private fun startAnimation() {
-		// Rotación
+		// Animacion de girar el logo
 		val rotation = ObjectAnimator.ofFloat(binding.ivLogo, View.ROTATION, 0f, 360f)
 		rotation.duration = 2000
 
-		// Escalar (hacer más grande y pequeño)
+		// Animacion de agrandar el logo
 		val scaleX = ObjectAnimator.ofFloat(binding.ivLogo, View.SCALE_X, 0.1f, 1f)
 		val scaleY = ObjectAnimator.ofFloat(binding.ivLogo, View.SCALE_Y, 0.1f, 1f)
 		scaleX.duration = 2000
 		scaleY.duration = 2000
 
+		//Crea un AnimatorSet() para poder ejecutar las dos animaciones a la vez
 		val animatorSet = AnimatorSet()
 		animatorSet.playTogether(rotation, scaleX, scaleY)
 		animatorSet.start()

@@ -21,8 +21,8 @@
         android:label="fragment_meeting"
         tools:layout="@layout/fragment_meeting" />
     <fragment
-        android:id="@+id/studTeachFragment"
-        android:name="com.example.elormov.ui.studteach.StudTeachFragment"
-        android:label="fragment_stud_teach"
-        tools:layout="@layout/fragment_stud_teach" />
+        android:id="@+id/userFragment"
+        android:name="com.example.elormov.ui.user.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
 </navigation>

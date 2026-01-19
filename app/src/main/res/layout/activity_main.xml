@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Acceso al Sistema"
+        android:text="@string/system_access"
         android:textSize="18sp"
         android:textStyle="bold"
         android:textColor="@color/textPrimary"
@@ -26,7 +26,7 @@
     <!-- Logo -->
     <ImageView
         android:id="@+id/ivLogo"
-        android:layout_width="170dp"
+        android:layout_width="300dp"
         android:layout_height="150dp"
         android:src="@drawable/logo_elorrieta"
         android:padding="16dp"
@@ -34,14 +34,15 @@
         android:layout_marginTop="32dp"
         app:layout_constraintTop_toBottomOf="@id/titleText"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/description"/>
 
     <!-- Welcome Text -->
     <TextView
         android:id="@+id/welcomeText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="¡Hola de nuevo!"
+        android:text="@string/hello_again"
         android:textSize="28sp"
         android:textStyle="bold"
         android:textColor="@color/textPrimary"
@@ -55,14 +56,15 @@
         android:id="@+id/welcomeSubtitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Bienvenido a tu comunidad educativa"
-        android:textSize="16sp"
-        android:textColor="@color/primary"
-        android:gravity="center"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/welcomeText"
+        android:gravity="center"
+        android:text="@string/welcome"
+        android:textColor="@color/primary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/welcomeText"
+        tools:ignore="TextContrastCheck" />
 
     <LinearLayout
         android:id="@+id/llUserPass"
@@ -79,7 +81,7 @@
             android:id="@+id/tvUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Correo"
+            android:text="@string/mail"
             android:textColor="@color/textPrimary"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -89,17 +91,20 @@
             android:id="@+id/etUsername"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:hint="@string/mail"
+            android:autofillHints="emailAddress"
+            android:background="@drawable/bg_edittext"
+            android:hint="@string/mail_example"
             android:inputType="textEmailAddress"
             android:padding="12dp"
-            android:background="@drawable/bg_edittext"/>
+            android:textColorHint="@color/textHint"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
 
         <!-- Password Field -->
         <TextView
             android:id="@+id/tvPassword"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Contraseña"
+            android:text="@string/password"
             android:textColor="@color/textPrimary"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -110,10 +115,13 @@
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="56dp"
-            android:hint="···········"
+            android:autofillHints="password"
+            android:background="@drawable/bg_edittext"
+            android:hint="@string/password_example"
             android:inputType="textPassword"
             android:padding="12dp"
-            android:background="@drawable/bg_edittext"/>
+            android:textColorHint="@color/textHint"
+            tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
     </LinearLayout>
 
     <!-- Login Button -->
@@ -121,15 +129,16 @@
         android:id="@+id/btnLogin"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:text="Iniciar Sesión"
-        android:textColor="@android:color/white"
-        android:backgroundTint="@color/primary"
-        android:textStyle="bold"
         android:layout_margin="10dp"
-        app:layout_constraintTop_toBottomOf="@id/llUserPass"
-        app:layout_constraintStart_toStartOf="parent"
+        android:backgroundTint="@color/primary"
+        android:text="@string/login"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/llUserPass"
+        tools:ignore="TextContrastCheck,VisualLintButtonSize" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

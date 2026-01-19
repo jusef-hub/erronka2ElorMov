@@ -34,7 +34,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:text="Perfil y Ajustes"
+                    android:text="@string/profile_settings"
                     android:gravity="center"
                     android:textSize="25sp"
                     app:layout_constraintStart_toStartOf="parent"
@@ -67,8 +67,10 @@
                         android:id="@+id/imgProfile"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
+                        app:tint="@color/textPrimary"
                         android:src="@drawable/profile_placeholder"
                         android:scaleType="centerCrop"
+                        android:contentDescription="@string/description"
                         android:background="@drawable/bg_avatar_circle"/>
 
                     <TextView
@@ -98,6 +100,11 @@
                         android:textSize="12sp"
                         android:textColor="@color/textSecondary"/>
 
+                    <TextView
+                        android:id="@+id/tvInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""/>
                 </LinearLayout>
 
                 <!-- LANGUAGE SELECTION -->
@@ -105,94 +112,96 @@
                     android:id="@+id/tvLanguageLabel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SELECCIÓN DE IDIOMA"
+                    android:text="@string/select_language"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     android:textColor="@color/textHint"
                     android:layout_marginBottom="8dp"/>
 
-                <HorizontalScrollView
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:scrollbars="none">
+                    android:orientation="horizontal">
 
+                    <!-- Language: Español -->
+                    <LinearLayout
+                        android:id="@+id/llSpanish"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginEnd="12dp"
+                        tools:ignore="UseCompoundDrawables">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/espania"
+                            android:contentDescription="@string/description"/>
+
+                        <TextView
+                            android:id="@+id/tvSpanish"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/spanish"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/textPrimary"/>
+                    </LinearLayout>
+
+                    <!-- Language: English -->
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal">
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginEnd="12dp"
+                        tools:ignore="UseCompoundDrawables">
 
-                        <!-- Language: Español -->
-                        <LinearLayout
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/usa"
+                            android:contentDescription="@string/description"/>
+
+                        <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:layout_marginEnd="12dp">
-
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:src="@drawable/espania"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Español"
-                                android:textSize="12sp"
-                                android:textStyle="bold"
-                                android:textColor="@color/textPrimary"/>
-                        </LinearLayout>
-
-                        <!-- Language: English -->
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:layout_marginEnd="12dp">
-
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:src="@drawable/usa"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="English"
-                                android:textSize="12sp"
-                                android:textColor="@color/textSecondary"/>
-                        </LinearLayout>
-
-                        <!-- Language: Euskera -->
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:gravity="center"
-                            android:layout_marginEnd="12dp">
-
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:src="@drawable/ikurrina"/>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Euskera"
-                                android:textSize="12sp"
-                                android:textColor="@color/textSecondary"/>
-                        </LinearLayout>
-
+                            android:text="@string/english"
+                            android:textSize="12sp"
+                            android:textColor="@color/textSecondary"/>
                     </LinearLayout>
-                </HorizontalScrollView>
+
+                    <!-- Language: Euskera -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:layout_marginEnd="12dp"
+                        tools:ignore="UseCompoundDrawables">
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ikurrina"
+                            android:contentDescription="@string/description"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/basque"
+                            android:textSize="12sp"
+                            android:textColor="@color/textSecondary"/>
+                    </LinearLayout>
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="PREFERENCIAS"
+                    android:text="@string/preferences"
                     android:textColor="@color/textSecondary"
                     />
 
@@ -222,7 +231,7 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="Modo Oscuro"
+                                android:text="@string/dark_mode"
                                 android:textStyle="bold"
                                 android:textColor="@color/textPrimary"/>
 
@@ -249,7 +258,7 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Administrar reuniones"
+                                android:text="@string/admin_meetings"
                                 android:textStyle="bold"
                                 android:textColor="@color/textPrimary"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -261,6 +270,7 @@
                                 android:layout_height="0dp"
                                 android:src="@drawable/ic_forward"
                                 app:tint="@color/textPrimary"
+                                android:contentDescription="@string/description"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent"
                                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -273,7 +283,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="SEGURIDAD"
+                    android:text="@string/security"
                     android:textColor="@color/textSecondary"
                     />
 
@@ -289,30 +299,24 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        tools:ignore="UseCompoundDrawables">
 
-                        <!-- Notifications -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:gravity="center_vertical">
+                            android:layout_weight="1"
+                            android:text="@string/change_password"
+                            android:textStyle="bold"
+                            android:textColor="@color/textPrimary"/>
 
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="Cambiar Contraseña"
-                                android:textStyle="bold"
-                                android:textColor="@color/textPrimary"/>
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/ic_forward"
-                                app:tint="@color/textPrimary"/>
-                        </LinearLayout>
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_forward"
+                            app:tint="@color/textPrimary"
+                            android:contentDescription="@string/description"/>
 
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -322,7 +326,7 @@
                     android:id="@+id/btnSync"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Sincronizar Datos Académicos"
+                    android:text="@string/academic_data"
                     android:layout_marginTop="24dp"
                     app:cornerRadius="16dp"
                     app:backgroundTint="@color/primary"
@@ -332,7 +336,7 @@
                     android:id="@+id/btnLogout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cerrar Sesión"
+                    android:text="@string/logout"
                     android:layout_marginTop="12dp"
                     style="?attr/materialButtonOutlinedStyle"
                     android:textColor="@color/textSecondary"/>

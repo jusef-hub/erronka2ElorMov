@@ -2,10 +2,61 @@
     <string name="app_name">ElorMov</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="schedule">horarios</string>
+
+    <!-- Barra de navegacion -->
+    <string name="schedule">Horarios</string>
     <string name="students">Alumnos</string>
     <string name="teachers">Profesores</string>
     <string name="meeting">Reuniones</string>
+
+    <!-- Pagina Profile -->
+    <string name="profile_settings">Perfil y Ajustes</string>
+    <string name="select_language">SELECCIÓN DE IDIOMA</string>
+    <string name="spanish">Español</string>
+    <string name="english">English</string>
+    <string name="basque">Euskera</string>
+    <string name="preferences">PREFERENCIAS</string>
+    <string name="dark_mode">Modo Oscuro</string>
+    <string name="admin_meetings">Administrar reuniones</string>
+    <string name="security">SEGURIDAD</string>
+    <string name="change_password">Cambiar Contraseña</string>
+    <string name="academic_data">Sincronizar Datos Académicos</string>
+    <string name="logout">Cerrar Sesión</string>
+
+    <!-- Login -->
+    <string name="system_access">Acceso al Sistema</string>
+    <string name="hello_again">¡Hola de nuevo!</string>
+    <string name="welcome">Bienvenido a tu comunidad educativa</string>
     <string name="profile">Perfil</string>
-    <string name="mail">ejemplo@elorrieta-errekamari.com</string>
+    <string name="mail">Correo</string>
+    <string name="mail_example">ejemplo@elorrieta-errekamari.com</string>
+    <string name="password">Contraseña</string>
+    <string name="password_example">··············</string>
+    <string name="login">Iniciar Sesión</string>
+
+    <!-- Pagina Schedule -->
+    <string name="weekly_schedule">Horario semanal</string>
+
+    <!-- Dias -->
+    <string name="monday">Lunes</string>
+    <string name="tuesday">Martes</string>
+    <string name="wednesday">Miercoles</string>
+    <string name="thursday">Jueves</string>
+    <string name="friday">Viernes</string>
+
+    <!-- Horas -->
+    <string name="eight">8:00</string>
+    <string name="nine">9:00</string>
+    <string name="ten">10:00</string>
+    <string name="eleven">11:00</string>
+    <string name="twelve">12:00</string>
+    <string name="one">13:00</string>
+
+    <!-- Pagina Profesores y Estudiantes -->
+    <string name="search">Buscar por nombre y apellido</string>
+
+    <!-- Otras -->
+    <string name="description">Description</string>
+
+
 </resources>

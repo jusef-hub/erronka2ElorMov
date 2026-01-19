@@ -13,55 +13,35 @@
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="0dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:weightSum="1">
+            <ImageView
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_calendar"
+                app:tint="@color/primary"
+                android:contentDescription="@string/description"/>
 
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_weight="0.9"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center_vertical">
+                android:orientation="vertical"
+                android:paddingStart="8dp"
+                android:paddingEnd="0dp">
 
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/ic_calendar"
-                    app:tint="@color/primary" />
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:paddingStart="8dp">
+                    android:text="@string/weekly_schedule"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/textPrimary" />
 
-                    <TextView
-                        android:id="@+id/title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Horario Semanal"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/textPrimary" />
-
-                    <TextView
-                        android:id="@+id/subtitle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Octubre 2023"
-                        android:textSize="12sp"
-                        android:textColor="@color/textHint" />
-                </LinearLayout>
             </LinearLayout>
-
-        </LinearLayout>
     </LinearLayout>
 
 
@@ -77,7 +57,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            tools:ignore="VisualLintBounds">
 
             <!-- Days Header -->
             <LinearLayout
@@ -93,40 +74,44 @@
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
-                    android:text="Lunes"
-                    android:textSize="10sp"
+                    android:text="@string/monday"
+                    android:textSize="11sp"
                     android:textColor="#9ca3af"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:gravity="bottom"/>
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
-                    android:text="Martes"
-                    android:textSize="10sp"
+                    android:text="@string/tuesday"
+                    android:textSize="11sp"
                     android:textColor="#9ca3af"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:gravity="bottom"/>
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
-                    android:text="Miercoles"
-                    android:textSize="10sp"
+                    android:text="@string/wednesday"
+                    android:textSize="11sp"
                     android:textColor="#9ca3af"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:gravity="bottom"/>
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
-                    android:text="Jueves"
-                    android:textSize="10sp"
+                    android:text="@string/thursday"
+                    android:textSize="11sp"
                     android:textColor="#9ca3af"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:gravity="bottom"/>
                 <TextView
                     android:layout_width="120dp"
                     android:layout_height="match_parent"
-                    android:text="Viernes"
-                    android:textSize="10sp"
+                    android:text="@string/friday"
+                    android:textSize="11sp"
                     android:textColor="#9ca3af"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold"
+                    android:gravity="bottom"/>
 
-                <!-- Repetir para Mar, Mié, Jue, Vie, Sáb... -->
             </LinearLayout>
 
             <!-- Hourly rows -->
@@ -142,58 +127,44 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:text="08:00"
-                        android:textSize="10sp"
+                        android:layout_width="match_parent"
+                        android:text="@string/eight"
+                        android:textSize="11sp"
                         android:textColor="#9ca3af"
                         android:layout_height="60dp"
                         android:gravity="center_vertical|center_horizontal"/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:text="09:00"
-                        android:textSize="10sp"
+                        android:layout_width="match_parent"
+                        android:text="@string/nine"
+                        android:textSize="11sp"
                         android:textColor="#9ca3af"
                         android:layout_height="60dp"
                         android:gravity="center_vertical|center_horizontal"/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:text="09:00"
-                        android:textSize="10sp"
+                        android:layout_width="match_parent"
+                        android:text="@string/ten"
+                        android:textSize="11sp"
                         android:textColor="#9ca3af"
                         android:layout_height="60dp"
                         android:gravity="center_vertical|center_horizontal"/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:text="10:00"
-                        android:textSize="10sp"
+                        android:layout_width="match_parent"
+                        android:text="@string/eleven"
+                        android:textSize="11sp"
                         android:textColor="#9ca3af"
                         android:layout_height="60dp"
                         android:gravity="center_vertical|center_horizontal"/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:text="11:00"
-                        android:textSize="10sp"
+                        android:layout_width="match_parent"
+                        android:text="@string/twelve"
+                        android:textSize="11sp"
                         android:textColor="#9ca3af"
                         android:layout_height="60dp"
                         android:gravity="center_vertical|center_horizontal"/>
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:text="12:00"
-                        android:textSize="10sp"
-                        android:textColor="#9ca3af"
-                        android:layout_height="60dp"
-                        android:gravity="center_vertical|center_horizontal"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text="13:00"
-                        android:textSize="10sp"
-                        android:textColor="#9ca3af"
-                        android:layout_height="60dp"
-                        android:gravity="center_vertical|center_horizontal"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:text="14:00"
-                        android:textSize="10sp"
+                        android:layout_width="match_parent"
+                        android:text="@string/one"
+                        android:textSize="11sp"
                         android:textColor="#9ca3af"
                         android:layout_height="60dp"
                         android:gravity="center_vertical|center_horizontal"/>
@@ -211,16 +182,56 @@
                         android:orientation="vertical">
 
                         <TextView
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:text="Matemáticas"
                             android:textSize="12sp"
-                            android:textColor="#007aff"
+                            android:textColor="@color/primary_variant"
                             android:layout_height="60dp"
-                            android:padding="4dp"
-                            android:background="#007aff1A"/>
+                            android:padding="6dp"
+                            android:background="@drawable/bg_edittext"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:text="Matemáticas"
+                            android:textSize="12sp"
+                            android:textColor="@color/primary_variant"
+                            android:layout_height="60dp"
+                            android:padding="6dp"
+                            android:background="@drawable/bg_edittext"/>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:text="Matemáticas"
+                            android:textSize="12sp"
+                            android:textColor="@color/primary_variant"
+                            android:layout_height="60dp"
+                            android:padding="6dp"
+                            android:background="@drawable/bg_edittext"/>
                     </LinearLayout>
 
-                    <!-- Repetir para otras clases o días -->
+                    <LinearLayout
+                        android:layout_width="120dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:text="Matemáticas"
+                            android:textSize="12sp"
+                            android:textColor="@color/primary_variant"
+                            android:layout_height="60dp"
+                            android:padding="6dp"
+                            android:background="@drawable/bg_edittext"/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:text="Matemáticas"
+                            android:textSize="12sp"
+                            android:textColor="@color/primary_variant"
+                            android:layout_height="60dp"
+                            android:padding="6dp"
+                            android:background="@drawable/bg_edittext"/>
+                    </LinearLayout>
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
