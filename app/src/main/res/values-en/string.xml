@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ElorMov</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Navigation Bar -->
+    <string name="schedule">Schedule</string>
+    <string name="students">Students</string>
+    <string name="teachers">Teachers</string>
+    <string name="meeting">Meetings</string>
+
+    <!-- Profile Page -->
+    <string name="profile_settings">Profile &amp; Settings</string>
+    <string name="select_language">SELECT LANGUAGE</string>
+    <string name="spanish">Español</string>
+    <string name="english">English</string>
+    <string name="basque">Euskera</string>
+    <string name="preferences">PREFERENCES</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="admin_meetings">Manage Meetings</string>
+    <string name="security">SECURITY</string>
+    <string name="change_password">Change Password</string>
+    <string name="academic_data">Sync Academic Data</string>
+    <string name="logout">Log Out</string>
+
+    <!-- Login -->
+    <string name="system_access">System Access</string>
+    <string name="hello_again">Hello again!</string>
+    <string name="welcome">Welcome to your educational community</string>
+    <string name="profile">Profile</string>
+    <string name="mail">Email</string>
+    <string name="mail_example">example@elorrieta-errekamari.com</string>
+    <string name="password">Password</string>
+    <string name="password_example">··············</string>
+    <string name="login">Log In</string>
+
+    <!-- Schedule Page -->
+    <string name="weekly_schedule">Weekly Schedule</string>
+
+    <!-- Days -->
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+
+    <!-- Hours -->
+    <string name="eight">8:00</string>
+    <string name="nine">9:00</string>
+    <string name="ten">10:00</string>
+    <string name="eleven">11:00</string>
+    <string name="twelve">12:00</string>
+    <string name="one">13:00</string>
+
+    <!-- Teachers and Students Page -->
+    <string name="search">Search by first and last name</string>
+
+    <!-- Others -->
+    <string name="description">Description</string>
+</resources>

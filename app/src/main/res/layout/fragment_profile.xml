@@ -151,6 +151,7 @@
 
                     <!-- Language: English -->
                     <LinearLayout
+                        android:id="@+id/llEnglish"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -165,15 +166,18 @@
                             android:contentDescription="@string/description"/>
 
                         <TextView
+                            android:id="@+id/tvEnglish"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/english"
                             android:textSize="12sp"
+                            android:textStyle="bold"
                             android:textColor="@color/textSecondary"/>
                     </LinearLayout>
 
                     <!-- Language: Euskera -->
                     <LinearLayout
+                        android:id="@+id/llBasque"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -188,10 +192,12 @@
                             android:contentDescription="@string/description"/>
 
                         <TextView
+                            android:id="@+id/tvBasque"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/basque"
                             android:textSize="12sp"
+                            android:textStyle="bold"
                             android:textColor="@color/textSecondary"/>
                     </LinearLayout>
 
