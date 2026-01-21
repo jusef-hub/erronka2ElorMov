@@ -42,14 +42,17 @@ class ProfileFragment : Fragment() {
 		super.onViewCreated(view, savedInstanceState)
 		viewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 		initListeners()
-		initUser()
+		//initUser()
 		observeDarkMode()
 		observeLanguage()
 	}
 
-	private fun initUser() {
-		TODO("Not yet implemented")
-	}
+	/*private fun initUser() {
+		viewModel.user.observe(viewLifecycleOwner) { user ->
+			this.user = user
+			binding.tvName.text = user.name
+		}
+	}*/
 
 	private fun updateUI() {
 		if (selectedLanguage == "es") {
