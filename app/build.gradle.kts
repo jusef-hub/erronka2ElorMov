@@ -50,8 +50,15 @@ dependencies {
 	implementation(libs.material)
 	implementation(libs.androidx.activity)
 	implementation(libs.androidx.constraintlayout)
-	implementation(libs.androidx.navigation.fragment.ktx)
-	implementation(libs.androidx.navigation.ui.ktx)
+
+	//Shared View Model
+	implementation(libs.androidx.lifecycle.viewmodel.ktx)
+
+	//Nav Component
+	var navVersion = "2.9.6"
+	implementation("androidx.navigation:navigation-fragment-ktx:${navVersion}")
+	implementation("androidx.navigation:navigation-ui-ktx:${navVersion}")
+
 
 	//DaggerHilt
 	val daggerVersion = "2.48"

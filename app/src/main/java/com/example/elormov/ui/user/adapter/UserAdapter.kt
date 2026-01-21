@@ -5,11 +5,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.elormov.R
-import com.example.elormov.domain.model.Student
+import com.example.elormov.domain.model.User
 
 class UserAdapter
-	(private var studentsList: List<Student> = emptyList(),
-	 private val onItemSelected:(Student) -> Unit): RecyclerView.Adapter<UserViewHolder>() {
+	(private var studentsList: List<User> = emptyList(),
+	 private val onItemSelected:(User) -> Unit): RecyclerView.Adapter<UserViewHolder>() {
 
 	override fun onCreateViewHolder(
 		parent: ViewGroup,
@@ -23,7 +23,7 @@ class UserAdapter
 	}
 
 	@SuppressLint("NotifyDataSetChanged")
-	fun updateList (listUpdate: List<Student>) {
+	fun updateList (listUpdate: List<User>) {
 		studentsList = listUpdate
 		notifyDataSetChanged()
 	}

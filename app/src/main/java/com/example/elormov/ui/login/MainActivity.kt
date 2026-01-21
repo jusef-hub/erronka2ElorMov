@@ -16,11 +16,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.elormov.R
 import com.example.elormov.databinding.ActivityMainBinding
+import com.example.elormov.domain.model.User
 import com.example.elormov.ui.home.HomeActivity
+import com.example.elormov.ui.home.SharedViewModel
 import com.example.elormov.ui.perfila.dataStore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
@@ -34,7 +37,8 @@ class MainActivity : AppCompatActivity() {
 
 	private lateinit var binding: ActivityMainBinding
 	private val loginViewModel: LoginViewModel by viewModels()
-
+	private lateinit var viewModel: SharedViewModel
+	private lateinit var user: User
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		initLangue()
@@ -42,6 +46,9 @@ class MainActivity : AppCompatActivity() {
 		enableEdgeToEdge()
 		binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
+
+		viewModel = ViewModelProvider(this)[SharedViewModel::class.java]
+
 		ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
 			val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
 			v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -90,7 +97,20 @@ class MainActivity : AppCompatActivity() {
 	private fun successState(it: LoginState.Success) {
 		//Dibujar success
 		Log.i("LOGIN", it.success.name)
+		user = User(
+			it.success.userID,
+			it.success.mail,
+			it.success.name,
+			it.success.lastName,
+			it.success.dni,
+			it.success.direccion,
+			it.success.telefono1,
+			it.success.argazkiaUrl,
+			it.success.tipo
+		)
+		viewModel.user.value = user
 		val intent = Intent(this, HomeActivity::class.java)
+
 		startActivity(intent)
 		finish()
 	}

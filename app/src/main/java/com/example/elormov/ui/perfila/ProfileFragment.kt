@@ -15,9 +15,12 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.elormov.R
 import com.example.elormov.databinding.FragmentProfileBinding
+import com.example.elormov.domain.model.User
+import com.example.elormov.ui.home.SharedViewModel
 import com.example.elormov.ui.login.MainActivity
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
@@ -31,13 +34,21 @@ class ProfileFragment : Fragment() {
 	private var _binding: FragmentProfileBinding? = null
 	private val binding get() = _binding!!
 	private var selectedLanguage = "es"
+	private lateinit var user: User
+	private lateinit var viewModel: SharedViewModel
 
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
+		viewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 		initListeners()
+		initUser()
 		observeDarkMode()
 		observeLanguage()
+	}
+
+	private fun initUser() {
+		TODO("Not yet implemented")
 	}
 
 	private fun updateUI() {
