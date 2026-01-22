@@ -81,7 +81,7 @@
             android:id="@+id/tvUsername"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/mail"
+            android:text="@string/username"
             android:textColor="@color/textPrimary"
             android:textSize="15sp"
             android:textStyle="bold"
@@ -93,7 +93,7 @@
             android:layout_height="56dp"
             android:autofillHints="emailAddress"
             android:background="@drawable/bg_edittext"
-            android:hint="@string/mail_example"
+            android:hint="@string/username_example"
             android:inputType="textEmailAddress"
             android:padding="12dp"
             android:textColorHint="@color/textHint"
@@ -124,6 +124,21 @@
             tools:ignore="TextContrastCheck,VisualLintTextFieldSize" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tvError"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:textColor="@color/error"
+        android:text="@string/error"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llUserPass"
+        app:layout_constraintBottom_toTopOf="@+id/btnLogin"/>
+
     <!-- Login Button -->
     <Button
         android:id="@+id/btnLogin"
@@ -137,7 +152,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/llUserPass"
+        app:layout_constraintTop_toBottomOf="@id/tvError"
         tools:ignore="TextContrastCheck,VisualLintButtonSize" />
 
 

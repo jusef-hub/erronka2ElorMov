@@ -51,6 +51,10 @@ dependencies {
 	implementation(libs.androidx.activity)
 	implementation(libs.androidx.constraintlayout)
 
+	//Glide
+	implementation("com.github.bumptech.glide:glide:4.16.0")
+	annotationProcessor("com.github.bumptech.glide:compiler:4.16.0")
+
 	//Shared View Model
 	implementation(libs.androidx.lifecycle.viewmodel.ktx)
 

@@ -1,15 +1,14 @@
 package com.example.elormov.domain.model
 
-import com.google.gson.annotations.SerializedName
 
 class User (
-	userID: Int,
-	mail: String,
-	name: String,
-	lastName: String,
-	dni: String?,
-	direccion: String?,
-	telefono1: String?,
-	argazkiaUrl: String?,
-	tipo: TipoUsuario,
+	val userID: Int,
+	val mail: String,
+	val name: String,
+	val lastName: String,
+	val dni: String?,
+	val direccion: String?,
+	val telefono1: String?,
+	val argazkiaUrl: String?,
+	val tipo: TipoUsuario,
 )

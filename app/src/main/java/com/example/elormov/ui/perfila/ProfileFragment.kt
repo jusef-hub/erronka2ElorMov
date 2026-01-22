@@ -1,5 +1,6 @@
 package com.example.elormov.ui.perfila
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -9,24 +10,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import com.example.elormov.R
 import com.example.elormov.databinding.FragmentProfileBinding
 import com.example.elormov.domain.model.User
 import com.example.elormov.ui.home.SharedViewModel
 import com.example.elormov.ui.login.MainActivity
+import com.example.elormov.ui.login.dataStore
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import java.util.Locale
 
-val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settingsDB")
 private val DARK_MODE_KEY = booleanPreferencesKey("DarkMode")
 private val LANGUAGE_KEY = stringPreferencesKey("SelectedLanguage")
 class ProfileFragment : Fragment() {
@@ -42,24 +41,42 @@ class ProfileFragment : Fragment() {
 		super.onViewCreated(view, savedInstanceState)
 		viewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 		initListeners()
-		//initUser()
+		initUser()
 		observeDarkMode()
 		observeLanguage()
 	}
 
-	/*private fun initUser() {
+	@SuppressLint("SetTextI18n")
+	private fun initUI() {
+		binding.tvName.text = this.user.name + " " + this.user.lastName
+		binding.tvEmail.text = this.user.mail
+		binding.tvRole.text = this.user.tipo.name.uppercase()
+		Glide.with(this)
+			.load(user.argazkiaUrl)
+			.placeholder(R.drawable.profile_placeholder)
+			.error(R.drawable.profile_placeholder)
+			.circleCrop()
+			.into(binding.ivProfile)
+		binding.tvInfo.text = "DNI: " + this.user.dni + "\n" +
+				"Dirección: " + this.user.direccion + "\n" +
+				"Teléfono: " + this.user.telefono1
+
+	}
+
+	private fun initUser() {
 		viewModel.user.observe(viewLifecycleOwner) { user ->
 			this.user = user
-			binding.tvName.text = user.name
+			Log.i("USER", "aaaaaaaaaaaaa"+user.name)
+			initUI()
 		}
-	}*/
+		Log.i("USER", "eeeeeeeeeeeeee")
+	}
 
 	private fun updateUI() {
 		if (selectedLanguage == "es") {
 			binding.tvSpanish.setTextColor(resources.getColor(R.color.textPrimary, null))
 			binding.tvEnglish.setTextColor(resources.getColor(R.color.textSecondary, null))
 			binding.tvBasque.setTextColor(resources.getColor(R.color.textSecondary, null))
-			Log.i("LANGUAGE", selectedLanguage)
 		} else if (selectedLanguage == "en") {
 			binding.tvSpanish.setTextColor(resources.getColor(R.color.textSecondary, null))
 			binding.tvEnglish.setTextColor(resources.getColor(R.color.textPrimary, null))

@@ -63,15 +63,20 @@
                     android:paddingTop="24dp"
                     android:paddingBottom="24dp">
 
-                    <ImageView
-                        android:id="@+id/imgProfile"
-                        android:layout_width="120dp"
-                        android:layout_height="120dp"
-                        app:tint="@color/textPrimary"
-                        android:src="@drawable/profile_placeholder"
-                        android:scaleType="centerCrop"
-                        android:contentDescription="@string/description"
-                        android:background="@drawable/bg_avatar_circle"/>
+                    <FrameLayout
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:background="@drawable/bg_avatar_circle"
+                        android:padding="6dp">
+
+                        <ImageView
+                            android:id="@+id/ivProfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/profile_placeholder"
+                            android:contentDescription="@string/description"/>
+                    </FrameLayout>
 
                     <TextView
                         android:id="@+id/tvName"
@@ -81,7 +86,7 @@
                         android:textStyle="bold"
                         android:textSize="22sp"
                         android:textColor="@color/textPrimary"
-                        android:layout_marginTop="12dp"/>
+                        android:layout_marginTop="6dp"/>
 
                     <TextView
                         android:id="@+id/tvRole"
@@ -99,13 +104,20 @@
                         tools:text="a.marti@academic-hub.edu"
                         android:textSize="12sp"
                         android:textColor="@color/textSecondary"/>
-
-                    <TextView
-                        android:id="@+id/tvInfo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=""/>
                 </LinearLayout>
+
+                <TextView
+                android:id="@+id/tvInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/textPrimary"
+                android:layout_marginBottom="5dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginVertical="12dp"
+                    android:background="@color/divider"/>
 
                 <!-- LANGUAGE SELECTION -->
                 <TextView

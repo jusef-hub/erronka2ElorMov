@@ -2,6 +2,7 @@ package com.example.elormov.ui.login
 
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,32 +14,32 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.os.LocaleListCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.elormov.R
 import com.example.elormov.databinding.ActivityMainBinding
-import com.example.elormov.domain.model.User
 import com.example.elormov.ui.home.HomeActivity
-import com.example.elormov.ui.home.SharedViewModel
-import com.example.elormov.ui.perfila.dataStore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
+val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "settingsDB")
 private val DARK_MODE_KEY = booleanPreferencesKey("DarkMode")
 private val LANGUAGE_KEY = stringPreferencesKey("SelectedLanguage")
+private val user = stringPreferencesKey("User")
+private val pass = stringPreferencesKey("Pass")
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
 	private lateinit var binding: ActivityMainBinding
 	private val loginViewModel: LoginViewModel by viewModels()
-	private lateinit var viewModel: SharedViewModel
-	private lateinit var user: User
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		initLangue()
@@ -46,8 +47,6 @@ class MainActivity : AppCompatActivity() {
 		enableEdgeToEdge()
 		binding = ActivityMainBinding.inflate(layoutInflater)
 		setContentView(binding.root)
-
-		viewModel = ViewModelProvider(this)[SharedViewModel::class.java]
 
 		ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
 			val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -58,6 +57,7 @@ class MainActivity : AppCompatActivity() {
 		binding.ivLogo.scaleY = 0.1f
 		binding.ivLogo.scaleX = 0.1f
 
+		loadUser()
 		initDarkMode()
 		initListeners()
 		initUIState()
@@ -92,24 +92,29 @@ class MainActivity : AppCompatActivity() {
 	private fun errorState(it: LoginState.Error) {
 		//Dibujar errordibuja
 		Log.i("LOGIN", it.error)
+		binding.tvError.visibility = View.VISIBLE
+		binding.tvError.text = it.error
 	}
 
 	private fun successState(it: LoginState.Success) {
 		//Dibujar success
 		Log.i("LOGIN", it.success.name)
-		user = User(
-			it.success.userID,
-			it.success.mail,
-			it.success.name,
-			it.success.lastName,
-			it.success.dni,
-			it.success.direccion,
-			it.success.telefono1,
-			it.success.argazkiaUrl,
-			it.success.tipo
-		)
-		viewModel.user.value = user
+		val user = it.success
 		val intent = Intent(this, HomeActivity::class.java)
+		intent.putExtra("USER_NAME", binding.etUsername.text.toString())
+		intent.putExtra("USER_PASS", binding.etPassword.text.toString())
+		intent.putExtra("USER_ID", user.userID)
+		intent.putExtra("USER_MAIL", user.mail)
+		intent.putExtra("NAME", user.name)
+		intent.putExtra("USER_LASTNAME", user.lastName)
+		intent.putExtra("USER_DNI", user.dni)
+		intent.putExtra("USER_ADDRESS", user.direccion)
+		intent.putExtra("USER_PHONE1", user.telefono1)
+		intent.putExtra("USER_IMAGE", user.argazkiaUrl)
+		intent.putExtra("USER_TYPE_ID", user.tipo.id)
+		intent.putExtra("USER_TYPE_NAME", user.tipo.name)
+
+		binding.tvError.visibility = View.GONE
 
 		startActivity(intent)
 		finish()
@@ -148,6 +153,20 @@ class MainActivity : AppCompatActivity() {
 
 			val appLocale = LocaleListCompat.forLanguageTags(lang)
 			AppCompatDelegate.setApplicationLocales(appLocale)
+		}
+	}
+
+	private fun loadUser() {
+		lifecycleScope.launch {
+			val userText = dataStore.data
+				.map { it[user] ?: "" }
+				.first()
+			binding.etUsername.setText(userText)
+
+			val passText = dataStore.data
+				.map { it[pass] ?: "" }
+				.first()
+			binding.etPassword.setText(passText)
 		}
 	}
 

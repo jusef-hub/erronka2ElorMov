@@ -25,14 +25,15 @@
 
     <!-- Saioa hasi -->
     <string name="system_access">Sistemara Sarrera</string>
-    <string name="hello_again">Berriro Kaixo!</string>
+    <string name="hello_again">Kaixo Berriro!</string>
     <string name="welcome">Ongietorri zure komunitate hezkuntzailera</string>
     <string name="profile">Profila</string>
-    <string name="mail">Posta elektronikoa</string>
-    <string name="mail_example">adibidea@elorrieta-errekamari.com</string>
+    <string name="username">Erabiltzailea</string>
+    <string name="username_example">erabiltzaile1</string>
     <string name="password">Pasahitza</string>
     <string name="password_example">··············</string>
     <string name="login">Hasi Saioa</string>
+    <string name="error">Erabiltzaile edo pasaitza okerrak</string>
 
     <!-- Ordutegi orria -->
     <string name="weekly_schedule">Aste Honetako Ordutegia</string>

@@ -28,11 +28,12 @@
     <string name="hello_again">¡Hola de nuevo!</string>
     <string name="welcome">Bienvenido a tu comunidad educativa</string>
     <string name="profile">Perfil</string>
-    <string name="mail">Correo</string>
-    <string name="mail_example">ejemplo@elorrieta-errekamari.com</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="username_example">usuario</string>
     <string name="password">Contraseña</string>
     <string name="password_example">··············</string>
     <string name="login">Iniciar Sesión</string>
+    <string name="error">Usuario o contraseña incorrectos</string>
 
     <!-- Pagina Schedule -->
     <string name="weekly_schedule">Horario semanal</string>
