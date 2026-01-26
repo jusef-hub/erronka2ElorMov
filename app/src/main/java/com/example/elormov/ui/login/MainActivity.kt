@@ -60,7 +60,6 @@ class MainActivity : AppCompatActivity() {
 		loadUser()
 		initDarkMode()
 		initListeners()
-		initUIState()
 
 		//Espera 0,5 segundos para iniciar la animacion
 		binding.ivLogo.postDelayed({
@@ -87,13 +86,16 @@ class MainActivity : AppCompatActivity() {
 
 	private fun loadingState() {
 		//Dibujar loading
+		binding.pb.visibility = View.VISIBLE
+		binding.tvError.visibility = View.GONE
 	}
 
 	private fun errorState(it: LoginState.Error) {
 		//Dibujar errordibuja
 		Log.i("LOGIN", it.error)
-		binding.tvError.visibility = View.VISIBLE
+		binding.pb.visibility = View.GONE
 		binding.tvError.text = it.error
+		binding.tvError.visibility = View.VISIBLE
 	}
 
 	private fun successState(it: LoginState.Success) {
@@ -125,6 +127,7 @@ class MainActivity : AppCompatActivity() {
 			val user = binding.etUsername.text.toString()
 			val pass = binding.etPassword.text.toString()
 			loginViewModel.getAuth(user, pass)
+			initUIState()
 		}
 	}
 

@@ -2,12 +2,12 @@ package com.example.elormov.ui.home
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -17,23 +17,23 @@ import com.example.elormov.databinding.ActivityHomeBinding
 import com.example.elormov.domain.model.TipoUsuario
 import com.example.elormov.domain.model.User
 import com.example.elormov.ui.login.dataStore
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 private val user = stringPreferencesKey("User")
 private val pass = stringPreferencesKey("Pass")
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
 	private lateinit var binding: ActivityHomeBinding
 	private lateinit var navController: NavController
-	private lateinit var viewModel: SharedViewModel
+	private val viewModel: SharedViewModel by viewModels()
 
 	override fun onCreate(savedInstanceState: Bundle?) {
 		super.onCreate(savedInstanceState)
 		enableEdgeToEdge()
 		binding = ActivityHomeBinding.inflate(layoutInflater)
 		setContentView(binding.root)
-
-		viewModel = ViewModelProvider(this)[SharedViewModel::class.java]
 
 		ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
 			val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

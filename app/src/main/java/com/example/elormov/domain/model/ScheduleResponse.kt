@@ -5,7 +5,8 @@ import com.google.gson.annotations.SerializedName
 class ScheduleResponse (
 	@SerializedName("dia") val day: String,
 	@SerializedName("hora") val hour: Int,
-	@SerializedName("aula") val clas: Int,
+	@SerializedName("modulo") val module: Modulo,
+	@SerializedName("aula") val classroom: String?,
 	@SerializedName("profesor") val teavherName: Profesor,
 
 )

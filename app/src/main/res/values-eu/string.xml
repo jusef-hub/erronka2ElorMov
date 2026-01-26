@@ -33,10 +33,10 @@
     <string name="password">Pasahitza</string>
     <string name="password_example">··············</string>
     <string name="login">Hasi Saioa</string>
-    <string name="error">Erabiltzaile edo pasaitza okerrak</string>
 
     <!-- Ordutegi orria -->
     <string name="weekly_schedule">Aste Honetako Ordutegia</string>
+    <string name="error">Errore bat egon da datuak kargatzerakoan</string>
 
     <!-- Egunak -->
     <string name="monday">Astelehena</string>

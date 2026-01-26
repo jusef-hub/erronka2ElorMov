@@ -14,7 +14,10 @@ interface ElorMovApiService {
 
 	suspend fun getAuth(@Body request: LoginRequest): Response<LoginResponse>
 
-	@GET("api/horarios/alumno/{id}")
+	@GET("api/horarios/{type}/{id}")
 
-	suspend fun getSchedule(@Path("id") id: Int): Response<ScheduleResponse>
+	suspend fun getSchedule(
+		@Path("type") type: String,
+		@Path("id") id: Int
+	): Response<List<ScheduleResponse>>
 }

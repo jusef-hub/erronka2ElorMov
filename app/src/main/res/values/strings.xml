@@ -33,10 +33,10 @@
     <string name="password">Contraseña</string>
     <string name="password_example">··············</string>
     <string name="login">Iniciar Sesión</string>
-    <string name="error">Usuario o contraseña incorrectos</string>
 
     <!-- Pagina Schedule -->
     <string name="weekly_schedule">Horario semanal</string>
+    <string name="error">Error al cargar los datos</string>
 
     <!-- Dias -->
     <string name="monday">Lunes</string>

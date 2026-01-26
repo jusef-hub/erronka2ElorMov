@@ -33,10 +33,10 @@
     <string name="password">Password</string>
     <string name="password_example">··············</string>
     <string name="login">Log In</string>
-    <string name="error">Incorrect user or password</string>
 
     <!-- Schedule Page -->
     <string name="weekly_schedule">Weekly Schedule</string>
+    <string name="error">An error occurred while loading the data</string>
 
     <!-- Days -->
     <string name="monday">Monday</string>

@@ -34,12 +34,12 @@ class ProfileFragment : Fragment() {
 	private val binding get() = _binding!!
 	private var selectedLanguage = "es"
 	private lateinit var user: User
-	private lateinit var viewModel: SharedViewModel
+	private lateinit var sharedViewModel: SharedViewModel
 
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
-		viewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+		sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 		initListeners()
 		initUser()
 		observeDarkMode()
@@ -50,7 +50,7 @@ class ProfileFragment : Fragment() {
 	private fun initUI() {
 		binding.tvName.text = this.user.name + " " + this.user.lastName
 		binding.tvEmail.text = this.user.mail
-		binding.tvRole.text = this.user.tipo.name.uppercase()
+		binding.tvRole.text = this.user.type.name.uppercase()
 		Glide.with(this)
 			.load(user.argazkiaUrl)
 			.placeholder(R.drawable.profile_placeholder)
@@ -64,7 +64,7 @@ class ProfileFragment : Fragment() {
 	}
 
 	private fun initUser() {
-		viewModel.user.observe(viewLifecycleOwner) { user ->
+		sharedViewModel.user.observe(viewLifecycleOwner) { user ->
 			this.user = user
 			Log.i("USER", "aaaaaaaaaaaaa"+user.name)
 			initUI()

@@ -1,240 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/root_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.schedule.ScheduleFragment">
 
-    <!-- Header -->
-    <LinearLayout
-        android:id="@+id/header"
-        android:layout_width="match_parent"
+    <ProgressBar
+        android:id="@+id/pb"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="16dp"
-        android:paddingStart="40dp"
-        android:paddingEnd="0dp">
+        android:indeterminateTint="@color/success"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-            <ImageView
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_calendar"
-                app:tint="@color/primary"
-                android:contentDescription="@string/description"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="@string/error"
+        android:gravity="center"/>
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:paddingStart="8dp"
-                android:paddingEnd="0dp">
-
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/weekly_schedule"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/textPrimary" />
-
-            </LinearLayout>
-    </LinearLayout>
-
-
-
-    <!-- Scrollable timetable -->
     <HorizontalScrollView
         android:id="@+id/horizontal_scroll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/header"
         android:scrollbars="none">
-
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:ignore="VisualLintBounds">
-
-            <!-- Days Header -->
+            android:layout_height="match_parent">
+            <!-- Horas -->
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:orientation="horizontal">
-
-                <!-- Empty corner -->
-                <TextView
-                    android:layout_width="50dp"
-                    android:layout_height="match_parent" />
-
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="match_parent"
-                    android:text="@string/monday"
-                    android:textSize="11sp"
-                    android:textColor="#9ca3af"
-                    android:textStyle="bold"
-                    android:gravity="bottom"/>
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="match_parent"
-                    android:text="@string/tuesday"
-                    android:textSize="11sp"
-                    android:textColor="#9ca3af"
-                    android:textStyle="bold"
-                    android:gravity="bottom"/>
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="match_parent"
-                    android:text="@string/wednesday"
-                    android:textSize="11sp"
-                    android:textColor="#9ca3af"
-                    android:textStyle="bold"
-                    android:gravity="bottom"/>
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="match_parent"
-                    android:text="@string/thursday"
-                    android:textSize="11sp"
-                    android:textColor="#9ca3af"
-                    android:textStyle="bold"
-                    android:gravity="bottom"/>
-                <TextView
-                    android:layout_width="120dp"
-                    android:layout_height="match_parent"
-                    android:text="@string/friday"
-                    android:textSize="11sp"
-                    android:textColor="#9ca3af"
-                    android:textStyle="bold"
-                    android:gravity="bottom"/>
-
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView android:id="@+id/voidSpace" android:layout_width="match_parent" android:layout_height="60dp" android:padding="6dp" android:textSize="12sp" android:textColor="@color/primary_variant" android:background="@color/primary"/>
+                <TextView android:id="@+id/hour1" android:layout_width="match_parent" android:layout_height="89dp" android:padding="6dp" android:text="@string/eight" android:textSize="12sp" android:textColor="@color/primary_variant" android:background="@color/surface"/>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider"/>
+                <TextView android:id="@+id/hour2" android:layout_width="match_parent" android:layout_height="89dp" android:padding="6dp" android:text="@string/nine" android:textSize="12sp" android:textColor="@color/primary_variant" android:background="@color/surface"/>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider"/>
+                <TextView android:id="@+id/hour3" android:layout_width="match_parent" android:layout_height="89dp" android:padding="6dp" android:text="@string/ten" android:textSize="12sp" android:textColor="@color/primary_variant" android:background="@color/surface"/>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider"/>
+                <TextView android:id="@+id/hour4" android:layout_width="match_parent" android:layout_height="89dp" android:padding="6dp" android:text="@string/eleven" android:textSize="12sp" android:textColor="@color/primary_variant" android:background="@color/surface"/>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider"/>
+                <TextView android:id="@+id/hour5" android:layout_width="match_parent" android:layout_height="89dp" android:padding="6dp" android:text="@string/twelve" android:textSize="12sp" android:textColor="@color/primary_variant" android:background="@color/surface"/>
+                <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/divider"/>
+                <TextView android:id="@+id/hour6" android:layout_width="match_parent" android:layout_height="89dp" android:padding="6dp" android:text="@string/one" android:textSize="12sp" android:textColor="@color/primary_variant" android:background="@color/surface"/>
             </LinearLayout>
 
-            <!-- Hourly rows -->
+            <!-- Lunes -->
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="120dp"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <!-- Hour labels -->
+                android:orientation="vertical">
                 <LinearLayout
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:text="@string/eight"
-                        android:textSize="11sp"
-                        android:textColor="#9ca3af"
-                        android:layout_height="60dp"
-                        android:gravity="center_vertical|center_horizontal"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:text="@string/nine"
-                        android:textSize="11sp"
-                        android:textColor="#9ca3af"
-                        android:layout_height="60dp"
-                        android:gravity="center_vertical|center_horizontal"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:text="@string/ten"
-                        android:textSize="11sp"
-                        android:textColor="#9ca3af"
-                        android:layout_height="60dp"
-                        android:gravity="center_vertical|center_horizontal"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:text="@string/eleven"
-                        android:textSize="11sp"
-                        android:textColor="#9ca3af"
-                        android:layout_height="60dp"
-                        android:gravity="center_vertical|center_horizontal"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:text="@string/twelve"
-                        android:textSize="11sp"
-                        android:textColor="#9ca3af"
-                        android:layout_height="60dp"
-                        android:gravity="center_vertical|center_horizontal"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:text="@string/one"
-                        android:textSize="11sp"
-                        android:textColor="#9ca3af"
-                        android:layout_height="60dp"
-                        android:gravity="center_vertical|center_horizontal"/>
-                </LinearLayout>
-
-                <!-- Day columns -->
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal">
-
-                    <LinearLayout
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:text="Matemáticas"
-                            android:textSize="12sp"
-                            android:textColor="@color/primary_variant"
-                            android:layout_height="60dp"
-                            android:padding="6dp"
-                            android:background="@drawable/bg_edittext"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:text="Matemáticas"
-                            android:textSize="12sp"
-                            android:textColor="@color/primary_variant"
-                            android:layout_height="60dp"
-                            android:padding="6dp"
-                            android:background="@drawable/bg_edittext"/>
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:text="Matemáticas"
-                            android:textSize="12sp"
-                            android:textColor="@color/primary_variant"
-                            android:layout_height="60dp"
-                            android:padding="6dp"
-                            android:background="@drawable/bg_edittext"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="120dp"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:text="Matemáticas"
-                            android:textSize="12sp"
-                            android:textColor="@color/primary_variant"
-                            android:layout_height="60dp"
-                            android:padding="6dp"
-                            android:background="@drawable/bg_edittext"/>
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:text="Matemáticas"
-                            android:textSize="12sp"
-                            android:textColor="@color/primary_variant"
-                            android:layout_height="60dp"
-                            android:padding="6dp"
-                            android:background="@drawable/bg_edittext"/>
-                    </LinearLayout>
-
+                    <TextView android:id="@+id/monday" android:layout_width="119dp" android:layout_height="60dp" android:padding="6dp" android:text="@string/monday" android:textSize="12sp" android:textColor="@color/primary_variant" android:background="@color/surface"/>
+                    <View android:layout_width="1dp" android:layout_height="match_parent" android:background="@color/divider"/>
                 </LinearLayout>
+                <TextView android:id="@+id/cell_monday_1" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Lunes 1" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_monday_2" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Lunes 2" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_monday_3" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Lunes 3" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_monday_4" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Lunes 4" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_monday_5" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Lunes 5" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_monday_6" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Lunes 6" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+            </LinearLayout>
+
+            <!-- Martes -->
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView android:id="@+id/tuesday" android:layout_width="119dp" android:layout_height="60dp" android:padding="6dp" android:text="@string/tuesday" android:textSize="12sp" android:textColor="@color/primary_variant" android:background="@color/surface"/>
+                    <View android:layout_width="1dp" android:layout_height="match_parent" android:background="@color/divider"/>
+                </LinearLayout>
+                <TextView android:id="@+id/cell_tuesday_1" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Martes 1" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_tuesday_2" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Martes 2" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_tuesday_3" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Martes 3" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_tuesday_4" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Martes 4" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_tuesday_5" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Martes 5" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_tuesday_6" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Martes 6" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+            </LinearLayout>
+
+            <!-- Miércoles -->
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView android:id="@+id/wednesday" android:layout_width="119dp" android:layout_height="60dp" android:padding="6dp" android:text="@string/wednesday" android:textSize="12sp" android:textColor="@color/primary_variant" android:background="@color/surface"/>
+                    <View android:layout_width="1dp" android:layout_height="match_parent" android:background="@color/divider"/>
+                </LinearLayout>
+                <TextView android:id="@+id/cell_wednesday_1" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Miércoles 1" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_wednesday_2" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Miércoles 2" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_wednesday_3" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Miércoles 3" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_wednesday_4" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Miércoles 4" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_wednesday_5" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Miércoles 5" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_wednesday_6" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Miércoles 6" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+            </LinearLayout>
+
+            <!-- Jueves -->
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView android:id="@+id/thursday" android:layout_width="119dp" android:layout_height="60dp" android:padding="6dp" android:text="@string/thursday" android:textSize="12sp" android:textColor="@color/primary_variant" android:background="@color/surface"/>
+                    <View android:layout_width="1dp" android:layout_height="match_parent" android:background="@color/divider"/>
+                </LinearLayout>
+                <TextView android:id="@+id/cell_thursday_1" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Jueves 1" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_thursday_2" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Jueves 2" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_thursday_3" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Jueves 3" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_thursday_4" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Jueves 4" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_thursday_5" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Jueves 5" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_thursday_6" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Jueves 6" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+            </LinearLayout>
+
+            <!-- Viernes -->
+            <LinearLayout
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <TextView android:id="@+id/friday" android:layout_width="119dp" android:layout_height="60dp" android:padding="6dp" android:text="@string/friday" android:textSize="12sp" android:textColor="@color/primary_variant" android:background="@color/surface"/>
+                    <View android:layout_width="1dp" android:layout_height="match_parent" android:background="@color/divider"/>
+                </LinearLayout>
+                <TextView android:id="@+id/cell_friday_1" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Viernes 1" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_friday_2" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Viernes 2" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_friday_3" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Viernes 3" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_friday_4" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Viernes 4" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_friday_5" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Viernes 5" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
+                <TextView android:id="@+id/cell_friday_6" android:layout_width="match_parent" android:layout_height="90dp" android:padding="6dp" tools:text="Viernes 6" android:textSize="12sp" android:textColor="@color/textSecondary" android:background="@drawable/bg_edittext"/>
             </LinearLayout>
         </LinearLayout>
     </HorizontalScrollView>
-
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,5 +10,5 @@ class User (
 	val direccion: String?,
 	val telefono1: String?,
 	val argazkiaUrl: String?,
-	val tipo: TipoUsuario,
+	val type: TipoUsuario,
 )
