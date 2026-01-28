@@ -11,4 +11,6 @@ class User (
 	val telefono1: String?,
 	val argazkiaUrl: String?,
 	val type: TipoUsuario,
+	val cycle: Cycle?,
+	val semester: Int?,
 )

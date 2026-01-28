@@ -20,4 +20,8 @@ interface ElorMovApiService {
 		@Path("type") type: String,
 		@Path("id") id: Int
 	): Response<List<ScheduleResponse>>
+
+	@GET("api//profesor-alumnos/{id}")
+
+	suspend fun getUsers(@Path ("id") id: Int): Response<List<LoginResponse>>
 }

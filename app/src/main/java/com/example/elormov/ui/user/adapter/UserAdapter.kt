@@ -8,7 +8,7 @@ import com.example.elormov.R
 import com.example.elormov.domain.model.User
 
 class UserAdapter
-	(private var studentsList: List<User> = emptyList(),
+	(private var userList: List<User> = emptyList(),
 	 private val onItemSelected:(User) -> Unit): RecyclerView.Adapter<UserViewHolder>() {
 
 	override fun onCreateViewHolder(
@@ -24,7 +24,7 @@ class UserAdapter
 
 	@SuppressLint("NotifyDataSetChanged")
 	fun updateList (listUpdate: List<User>) {
-		studentsList = listUpdate
+		userList = listUpdate
 		notifyDataSetChanged()
 	}
 
@@ -32,10 +32,10 @@ class UserAdapter
 		holder: UserViewHolder,
 		position: Int
 	) {
-		holder.render()
+		holder.render(userList[position], onItemSelected)
 	}
 
 	override fun getItemCount(): Int {
-		return studentsList.size
+		return userList.size
 	}
 }

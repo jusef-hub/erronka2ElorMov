@@ -33,6 +33,17 @@
             app:layout_constraintTop_toTopOf="@id/ivUser"
             app:layout_constraintEnd_toStartOf="@id/ivArrow"
             android:layout_marginStart="12dp"/>
+        <TextView
+            android:id="@+id/tvInfo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/ivUser"
+            app:layout_constraintTop_toBottomOf="@id/tvName"
+            app:layout_constraintEnd_toStartOf="@id/ivArrow"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="5dp"/>
 
 
         <ImageView

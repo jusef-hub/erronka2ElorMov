@@ -12,9 +12,16 @@ data class LoginResponse (
 	@SerializedName("telefono1") val telefono1: String?,
 	@SerializedName("argazkia_url") val argazkiaUrl: String?,
 	@SerializedName("tipo") val tipo: TipoUsuario,
+	@SerializedName("ciclo") val cycle: Cycle?,
+	@SerializedName("semestre") val semester: Int?,
 )
 
 data class TipoUsuario(
+	@SerializedName("id") val id: Int,
+	@SerializedName("name") val name: String
+)
+
+data class Cycle(
 	@SerializedName("id") val id: Int,
 	@SerializedName("name") val name: String
 )

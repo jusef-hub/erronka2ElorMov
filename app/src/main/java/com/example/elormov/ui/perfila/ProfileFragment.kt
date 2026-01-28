@@ -72,6 +72,7 @@ class ProfileFragment : Fragment() {
 		Log.i("USER", "eeeeeeeeeeeeee")
 	}
 
+	//Cuando seleccionas el idioma cambia el color del texto para destacarlo
 	private fun updateUI() {
 		if (selectedLanguage == "es") {
 			binding.tvSpanish.setTextColor(resources.getColor(R.color.textPrimary, null))
@@ -88,6 +89,7 @@ class ProfileFragment : Fragment() {
 		}
 	}
 
+	//Aplica el modo oscuro si esta activado en SettingValue
 	private fun observeDarkMode() {
 		viewLifecycleOwner.lifecycleScope.launch {
 			requireContext().dataStore.data
