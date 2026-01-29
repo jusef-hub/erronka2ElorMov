@@ -138,7 +138,7 @@
     <TextView
         android:id="@+id/tvError"
         android:layout_width="0dp"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:textColor="@color/error"
         android:text="@string/error"
         android:textSize="20sp"

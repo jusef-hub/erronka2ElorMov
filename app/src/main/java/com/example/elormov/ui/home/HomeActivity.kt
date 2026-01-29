@@ -66,7 +66,9 @@ class HomeActivity : AppCompatActivity() {
 			intent.getStringExtra("USER_ADDRESS"),
 			intent.getStringExtra("USER_PHONE1"),
 			intent.getStringExtra("USER_IMAGE"),
-			tipo
+			tipo,
+			null,
+			null
 		)
 		viewModel.user.value = user
 	}

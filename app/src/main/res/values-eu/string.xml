@@ -33,6 +33,7 @@
     <string name="password">Pasahitza</string>
     <string name="password_example">··············</string>
     <string name="login">Hasi Saioa</string>
+    <string name="access_denied">Ikasleak eta irakasleak bakarrik dute baimena sistemara sartzeko</string>
 
     <!-- Ordutegi orria -->
     <string name="weekly_schedule">Aste Honetako Ordutegia</string>

@@ -1,7 +1,7 @@
 package com.example.elormov.domain.model
 
 
-class User (
+data class User (
 	val userID: Int,
 	val mail: String,
 	val name: String,

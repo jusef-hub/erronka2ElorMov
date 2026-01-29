@@ -2,7 +2,13 @@ package com.example.elormov.domain.model
 
 import com.google.gson.annotations.SerializedName
 
-data class LoginResponse (
+class UserResponse (
+	@SerializedName("alumno") val alumno: Alum,
+	@SerializedName("ciclo") val ciclo: Cycle,
+	@SerializedName("curso") val curso: Int
+)
+
+data class Alum(
 	@SerializedName("id") val userID: Int,
 	@SerializedName("email") val mail: String,
 	@SerializedName("nombre") val name: String,
@@ -14,7 +20,7 @@ data class LoginResponse (
 	@SerializedName("tipo") val tipo: TipoUsuario,
 )
 
-data class TipoUsuario(
+data class Cycle(
 	@SerializedName("id") val id: Int,
-	@SerializedName("name") val name: String
+	@SerializedName("nombre") val name: String
 )

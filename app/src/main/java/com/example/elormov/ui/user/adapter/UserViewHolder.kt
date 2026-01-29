@@ -19,5 +19,6 @@ class UserViewHolder (view: View): RecyclerView.ViewHolder(view) {
 			.circleCrop()
 			.into(binding.ivUser)
 		binding.tvName.text = user.name + " " + user.lastName
+		binding.tvInfo.text = user.semester.toString() + " " + user.cycle!!.name
 	}
 }

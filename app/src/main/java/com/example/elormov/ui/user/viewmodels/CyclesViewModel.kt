@@ -1,4 +1,4 @@
-package com.example.elormov.ui.user
+package com.example.elormov.ui.user.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,21 +12,21 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class UserViewModel @Inject constructor(private val apiService: ElorMovApiService) : ViewModel() {
-	private val _state = MutableStateFlow<UserState>(UserState.Loading)
-	val state: StateFlow<UserState> = _state
+class CyclesViewModel @Inject constructor(private val apiService: ElorMovApiService) : ViewModel() {
+	private val _state = MutableStateFlow<CyclesState>(CyclesState.Loading)
+	val state: StateFlow<CyclesState> = _state
 
-	fun getUsers(id: Int) {
+	fun getCycles() {
 		viewModelScope.launch {
-			_state.value = UserState.Loading
+			_state.value = CyclesState.Loading
 			val result = withContext(Dispatchers.IO) {
-				apiService.getUsers(id)
+				apiService.getCiclos()
 			}
 			if (result.body() != null) {
-				_state.value = UserState.Success(result.body()!!)
+				_state.value = CyclesState.Success(result.body()!!)
 			} else {
 				val error = result.errorBody()?.string() ?: "Error desconocido"
-				_state.value = UserState.Error(error)
+				_state.value = CyclesState.Error(error)
 			}
 		}
 	}

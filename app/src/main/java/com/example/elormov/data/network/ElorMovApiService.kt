@@ -1,8 +1,10 @@
 package com.example.elormov.data.network
 
 import com.example.elormov.domain.model.LoginRequest
+import com.example.elormov.domain.model.CyclesResponse
 import com.example.elormov.domain.model.LoginResponse
 import com.example.elormov.domain.model.ScheduleResponse
+import com.example.elormov.domain.model.UserResponse
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -21,7 +23,11 @@ interface ElorMovApiService {
 		@Path("id") id: Int
 	): Response<List<ScheduleResponse>>
 
-	@GET("api//profesor-alumnos/{id}")
+	@GET("api/matriculaciones/profesor-alumnos/{id}")
 
-	suspend fun getUsers(@Path ("id") id: Int): Response<List<LoginResponse>>
+	suspend fun getAlums(@Path ("id") id: Int): Response<List<UserResponse>>
+
+	@GET("ciclos")
+
+	suspend fun getCiclos(): Response<List<CyclesResponse>>
 }

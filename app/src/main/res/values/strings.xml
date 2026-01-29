@@ -33,6 +33,7 @@
     <string name="password">Contraseña</string>
     <string name="password_example">··············</string>
     <string name="login">Iniciar Sesión</string>
+    <string name="access_denied">Solo los alumnos y profesores pueden acceder al sistema</string>
 
     <!-- Pagina Schedule -->
     <string name="weekly_schedule">Horario semanal</string>

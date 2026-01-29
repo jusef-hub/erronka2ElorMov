@@ -102,24 +102,30 @@ class MainActivity : AppCompatActivity() {
 		//Dibujar success
 		Log.i("LOGIN", it.success.name)
 		val user = it.success
-		val intent = Intent(this, HomeActivity::class.java)
-		intent.putExtra("USER_NAME", binding.etUsername.text.toString())
-		intent.putExtra("USER_PASS", binding.etPassword.text.toString())
-		intent.putExtra("USER_ID", user.userID)
-		intent.putExtra("USER_MAIL", user.mail)
-		intent.putExtra("NAME", user.name)
-		intent.putExtra("USER_LASTNAME", user.lastName)
-		intent.putExtra("USER_DNI", user.dni)
-		intent.putExtra("USER_ADDRESS", user.direccion)
-		intent.putExtra("USER_PHONE1", user.telefono1)
-		intent.putExtra("USER_IMAGE", user.argazkiaUrl)
-		intent.putExtra("USER_TYPE_ID", user.tipo.id)
-		intent.putExtra("USER_TYPE_NAME", user.tipo.name)
+		if (user.tipo.id == 1 || user.tipo.id == 2) {
+			binding.tvError.setText(R.string.access_denied)
+			binding.pb.visibility = View.GONE
+			binding.tvError.visibility = View.VISIBLE
+		} else {
+			val intent = Intent(this, HomeActivity::class.java)
+			intent.putExtra("USER_NAME", binding.etUsername.text.toString())
+			intent.putExtra("USER_PASS", binding.etPassword.text.toString())
+			intent.putExtra("USER_ID", user.userID)
+			intent.putExtra("USER_MAIL", user.mail)
+			intent.putExtra("NAME", user.name)
+			intent.putExtra("USER_LASTNAME", user.lastName)
+			intent.putExtra("USER_DNI", user.dni)
+			intent.putExtra("USER_ADDRESS", user.direccion)
+			intent.putExtra("USER_PHONE1", user.telefono1)
+			intent.putExtra("USER_IMAGE", user.argazkiaUrl)
+			intent.putExtra("USER_TYPE_ID", user.tipo.id)
+			intent.putExtra("USER_TYPE_NAME", user.tipo.name)
 
-		binding.tvError.visibility = View.GONE
+			binding.tvError.visibility = View.GONE
 
-		startActivity(intent)
-		finish()
+			startActivity(intent)
+			finish()
+		}
 	}
 
 	private fun initListeners() {

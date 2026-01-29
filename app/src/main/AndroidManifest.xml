@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".ElorMovApp"
         android:allowBackup="true"
@@ -13,9 +15,12 @@
         android:theme="@style/Theme.ElorMov"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.user.UserDetailsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.home.HomeActivity"
             android:exported="false"
-            android:screenOrientation="locked"/>
+            android:screenOrientation="locked" />
         <activity
             android:name=".ui.login.MainActivity"
             android:exported="true"

@@ -10,6 +10,7 @@
     <!-- Search -->
     <LinearLayout
         android:id="@+id/llSearch"
+        android:visibility="gone"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
@@ -41,7 +42,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/clFilter"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="0dp"
         android:layout_height="60dp"
         app:layout_constraintTop_toTopOf="parent"
@@ -70,14 +71,29 @@
             android:layout_marginStart="20dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <ProgressBar
+        android:id="@+id/pb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/success"
+        android:layout_marginTop="20dp"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
     <!-- List -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerDirectorio"
+        android:id="@+id/rvUsers"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
         android:padding="16dp"
-        app:layout_constraintTop_toBottomOf="@id/llSearch"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
