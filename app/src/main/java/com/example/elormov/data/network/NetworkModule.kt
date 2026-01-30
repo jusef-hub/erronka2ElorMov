@@ -15,7 +15,7 @@ object NetworkModule {
 	@Provides
 	@Singleton
 	fun provideElorMovApiService(): Retrofit {
-		return Retrofit.Builder().baseUrl("http://10.0.2.2:8080/")
+		return Retrofit.Builder().baseUrl("http://10.5.104.111:8080/")
 			.addConverterFactory(GsonConverterFactory.create())
 			.build()
 	}
