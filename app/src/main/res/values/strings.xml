@@ -59,6 +59,7 @@
 
     <!-- Otras -->
     <string name="description">Description</string>
+    <string name="all">Todos</string>
 
 
 </resources>

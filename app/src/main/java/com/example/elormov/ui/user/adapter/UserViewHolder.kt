@@ -18,7 +18,10 @@ class UserViewHolder (view: View): RecyclerView.ViewHolder(view) {
 			.error(R.drawable.profile_placeholder)
 			.circleCrop()
 			.into(binding.ivUser)
-		binding.tvName.text = user.name + " " + user.lastName
-		binding.tvInfo.text = user.semester.toString() + " " + user.cycle!!.name
+
+		binding.tvName.text = "${user.name} ${user.lastName}"
+		binding.tvInfo.text = "${user.semester} ${user.cycle?.name}"
+
+		itemView.setOnClickListener { onItemSelected(user) }
 	}
 }

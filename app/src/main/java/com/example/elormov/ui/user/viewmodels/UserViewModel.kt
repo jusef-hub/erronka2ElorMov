@@ -16,7 +16,7 @@ class UserViewModel @Inject constructor(private val apiService: ElorMovApiServic
 	private val _state = MutableStateFlow<UserState>(UserState.Loading)
 	val state: StateFlow<UserState> = _state
 
-	fun getUsers(id: Int) {
+	fun getAlums(id: Int) {
 		viewModelScope.launch {
 			_state.value = UserState.Loading
 			val result = withContext(Dispatchers.IO) {
