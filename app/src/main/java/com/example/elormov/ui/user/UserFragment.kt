@@ -22,14 +22,17 @@ import com.example.elormov.R
 import com.example.elormov.databinding.ActivityUserDetailsBinding
 import com.example.elormov.databinding.FragmentUserBinding
 import com.example.elormov.domain.model.CyclesResponse
+import com.example.elormov.domain.model.TeacherResponse
 import com.example.elormov.domain.model.User
 import com.example.elormov.domain.model.UserResponse
 import com.example.elormov.ui.home.SharedViewModel
 import com.example.elormov.ui.user.adapter.UserAdapter
+import com.example.elormov.ui.user.viewmodels.AlumViewModel
 import com.example.elormov.ui.user.viewmodels.CyclesState
 import com.example.elormov.ui.user.viewmodels.CyclesViewModel
-import com.example.elormov.ui.user.viewmodels.UserState
-import com.example.elormov.ui.user.viewmodels.UserViewModel
+import com.example.elormov.ui.user.viewmodels.AlumState
+import com.example.elormov.ui.user.viewmodels.TeacherState
+import com.example.elormov.ui.user.viewmodels.TeacherViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -39,15 +42,16 @@ class UserFragment : Fragment() {
 	private var _binding: FragmentUserBinding? = null
 	private val binding get() = _binding!!
 	private lateinit var userAdapter: UserAdapter
-	private var userList = mutableListOf<User>()
+	private var alumList = mutableListOf<User>()
 	private var filterList = mutableListOf<User>()
 	private var cycleList = mutableListOf<String>()
 	private lateinit var user: User
 	private lateinit var selectionCycles: String
 	private lateinit var selectionSemesters: String
 	private lateinit var sharedViewModel: SharedViewModel
-	private val userViewModel: UserViewModel by viewModels()
+	private val alumViewModel: AlumViewModel by viewModels()
 	private val cyclesViewModel: CyclesViewModel by viewModels()
+	private val teacherViewModel: TeacherViewModel by viewModels()
 	private val all by lazy { getString(R.string.all) }
 
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -55,12 +59,14 @@ class UserFragment : Fragment() {
 		sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 		selectionCycles = getString(R.string.all)
 		selectionSemesters = getString(R.string.all)
-		initUIState()
+		initUIStateAlums()
 		initUIStateCycles()
 		initComponents()
 		initUser()
 	}
 
+
+	/* --- Parte de Cycles --- */
 	private fun initUIStateCycles() {
 		viewLifecycleOwner.lifecycleScope.launch {
 			viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -86,6 +92,8 @@ class UserFragment : Fragment() {
 		initFilters()
 	}
 
+
+	/* --- Hace un filtro con los ciclos y el curso --- */
 	private fun initFilters() {
 		val adapterCycle = ArrayAdapter(
 			requireContext(),
@@ -124,8 +132,8 @@ class UserFragment : Fragment() {
 		}
 	}
 	private fun applyFilters() {
-		if (userList.isEmpty()) return
-		filterList = userList.filter { user ->
+		if (alumList.isEmpty()) return
+		filterList = alumList.filter { user ->
 			val matchCycle =
 				selectionCycles == all || user.cycle?.name == selectionCycles
 
@@ -138,23 +146,26 @@ class UserFragment : Fragment() {
 		userAdapter.updateList(filterList)
 	}
 
-	private fun initUIState() {
+
+
+	/* --- Consigue los alumnos --- */
+	private fun initUIStateAlums() {
 		viewLifecycleOwner.lifecycleScope.launch {
 			viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-				userViewModel.state.collect { state ->
+				alumViewModel.state.collect { state ->
 					when (state) {
-						is UserState.Error -> errorState(state.error)
-						UserState.Loading -> loadingState()
-						is UserState.Success -> successState(state.users)
+						is AlumState.Error -> errorState(state.error)
+						AlumState.Loading -> loadingState()
+						is AlumState.Success -> successStateAlums(state.alums)
 					}
 				}
 			}
 		}
 	}
 
-	private fun successState(users: List<UserResponse>) {
+	private fun successStateAlums(users: List<UserResponse>) {
 		binding.pb.visibility = View.GONE
-		userList = mutableListOf<User>()
+		alumList = mutableListOf<User>()
 
 		for (user in users) {
 			val newUser = User(
@@ -170,11 +181,33 @@ class UserFragment : Fragment() {
 				user.ciclo,
 				user.curso
 			)
-			userList.add(newUser)
+			alumList.add(newUser)
 		}
-		filterList = userList.toMutableList()
+		filterList = alumList.toMutableList()
 		applyFilters()
 	}
+
+
+
+
+	private fun initUIStateTeachers() {
+		viewLifecycleOwner.lifecycleScope.launch {
+			viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+				teacherViewModel.state.collect { state ->
+					when (state) {
+						is TeacherState.Error -> errorState(state.error)
+						TeacherState.Loading -> loadingState()
+						is TeacherState.Success -> successStateTeachers(state.teachers)
+					}
+				}
+			}
+		}
+	}
+
+	private fun successStateTeachers(users: List<TeacherResponse>) {}
+	
+	
+	
 	private fun loadingState() {
 		//dibujar loading
 		binding.pb.visibility = View.VISIBLE
@@ -186,12 +219,24 @@ class UserFragment : Fragment() {
 		binding.pb.visibility = View.GONE
 	}
 
+
+	/* --- Inicializa el usuario --- */
+	private fun initUser() {
+		sharedViewModel.user.observe(viewLifecycleOwner) { user ->
+			this.user = user
+			initUI()
+		}
+	}
+
+
+
+	/* --- Cambia la UI dependiendo del tipo de usuario --- */
 	private fun initUI() {
 		when (user.type.id) {
 			3 -> {
 				binding.llSearch.visibility = View.GONE
 				binding.clFilter.visibility = View.VISIBLE
-				userViewModel.getAlums(user.userID)
+				alumViewModel.getAlums(user.userID)
 				cyclesViewModel.getCycles()
 			}
 			4 -> {
@@ -201,19 +246,17 @@ class UserFragment : Fragment() {
 		}
 	}
 
-	private fun initUser() {
-		sharedViewModel.user.observe(viewLifecycleOwner) { user ->
-			this.user = user
-			initUI()
-		}
-	}
 
+	/* --- Inicia el adapter --- */
 	private fun initComponents() {
 		userAdapter = UserAdapter(onItemSelected = {onItemSelected(it)})
 		binding.rvUsers.layoutManager = GridLayoutManager(context,1)
 		binding.rvUsers.adapter = userAdapter
 	}
 
+
+
+	/* --- Cuando clicas en un usuario ejcuta esto y muestra los detalles en un dialog --- */
 	@SuppressLint("SetTextI18n")
 	private fun onItemSelected(user: User) {
 		val userDetailsBinding = ActivityUserDetailsBinding.inflate(layoutInflater)

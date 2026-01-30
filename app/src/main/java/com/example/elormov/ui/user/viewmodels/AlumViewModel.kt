@@ -12,21 +12,21 @@ import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
-class CyclesViewModel @Inject constructor(private val apiService: ElorMovApiService) : ViewModel() {
-	private val _state = MutableStateFlow<CyclesState>(CyclesState.Loading)
-	val state: StateFlow<CyclesState> = _state
+class AlumViewModel @Inject constructor(private val apiService: ElorMovApiService) : ViewModel() {
+	private val _state = MutableStateFlow<AlumState>(AlumState.Loading)
+	val state: StateFlow<AlumState> = _state
 
-	fun getCycles() {
+	fun getAlums(id: Int) {
 		viewModelScope.launch {
-			_state.value = CyclesState.Loading
+			_state.value = AlumState.Loading
 			val result = withContext(Dispatchers.IO) {
-				apiService.getCycles()
+				apiService.getAlums(id)
 			}
 			if (result.body() != null) {
-				_state.value = CyclesState.Success(result.body()!!)
+				_state.value = AlumState.Success(result.body()!!)
 			} else {
 				val error = result.errorBody()?.string() ?: "Error desconocido"
-				_state.value = CyclesState.Error(error)
+				_state.value = AlumState.Error(error)
 			}
 		}
 	}
