@@ -25,4 +25,8 @@
         android:name="com.example.elormov.ui.user.UserFragment"
         android:label="fragment_user"
         tools:layout="@layout/fragment_user" />
+    <dialog
+        android:id="@+id/teacherScheduleDialogFragment"
+        android:name="com.example.elormov.ui.user.TeacherScheduleDialogFragment"
+        android:label="TeacherScheduleDialogFragment" />
 </navigation>
