@@ -20,7 +20,9 @@ class UserViewHolder (view: View): RecyclerView.ViewHolder(view) {
 			.into(binding.ivUser)
 
 		binding.tvName.text = "${user.name} ${user.lastName}"
-		binding.tvInfo.text = "${user.semester} ${user.cycle?.name}"
+		if (user.type.id == 4) {
+			binding.tvInfo.text = "${user.semester} ${user.cycle?.name}"
+		}
 
 		itemView.setOnClickListener { onItemSelected(user) }
 	}

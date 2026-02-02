@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
@@ -42,7 +43,7 @@ class UserFragment : Fragment() {
 	private var _binding: FragmentUserBinding? = null
 	private val binding get() = _binding!!
 	private lateinit var userAdapter: UserAdapter
-	private var alumList = mutableListOf<User>()
+	private var userList = mutableListOf<User>()
 	private var filterList = mutableListOf<User>()
 	private var cycleList = mutableListOf<String>()
 	private lateinit var user: User
@@ -59,8 +60,6 @@ class UserFragment : Fragment() {
 		sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
 		selectionCycles = getString(R.string.all)
 		selectionSemesters = getString(R.string.all)
-		initUIStateAlums()
-		initUIStateCycles()
 		initComponents()
 		initUser()
 	}
@@ -106,7 +105,7 @@ class UserFragment : Fragment() {
 			override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
 
 				selectionCycles = parent.getItemAtPosition(position).toString()
-				applyFilters()
+				filtersAlums()
 			}
 
 			override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -124,22 +123,32 @@ class UserFragment : Fragment() {
 			override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
 
 				selectionSemesters = parent.getItemAtPosition(position).toString()
-				applyFilters()
+				filtersAlums()
 			}
 
 			override fun onNothingSelected(parent: AdapterView<*>?) {}
 
 		}
 	}
-	private fun applyFilters() {
-		if (alumList.isEmpty()) return
-		filterList = alumList.filter { user ->
+	private fun filtersAlums() {
+		if (userList.isEmpty()) return
+
+		//Filtra los alumnos de uno en uno haciendo que cumplan las condiciones
+		filterList = userList.filter { user ->
+			//Condicion1
+			//Si en el desplegable estaseleccionado todos o el ciclo seleccionado es igual que el del alumno
+			//devuelve true si no false
 			val matchCycle =
 				selectionCycles == all || user.cycle?.name == selectionCycles
 
+			//Condicion2
+			//Si en el desplegable estaseleccionado todos o el semestre seleccionado es igual que el del alumno
+			//devuelve true si no false
 			val matchSemester =
 				selectionSemesters == all || user.semester.toString() == selectionSemesters
 
+			//Coprueba si el usuario cumple ambas condiciones
+			//Si las cumple mete el usuario en la lista filtrada, si no lo descarta
 			matchCycle && matchSemester
 		}.toMutableList()
 
@@ -165,7 +174,7 @@ class UserFragment : Fragment() {
 
 	private fun successStateAlums(users: List<UserResponse>) {
 		binding.pb.visibility = View.GONE
-		alumList = mutableListOf<User>()
+		userList = mutableListOf<User>()
 
 		for (user in users) {
 			val newUser = User(
@@ -181,15 +190,15 @@ class UserFragment : Fragment() {
 				user.ciclo,
 				user.curso
 			)
-			alumList.add(newUser)
+			userList.add(newUser)
 		}
-		filterList = alumList.toMutableList()
-		applyFilters()
+		filterList = userList.toMutableList()
+		filtersAlums()
 	}
 
 
 
-
+	/* --- Consigue los profesores --- */
 	private fun initUIStateTeachers() {
 		viewLifecycleOwner.lifecycleScope.launch {
 			viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
@@ -204,15 +213,58 @@ class UserFragment : Fragment() {
 		}
 	}
 
-	private fun successStateTeachers(users: List<TeacherResponse>) {}
-	
-	
-	
+	private fun successStateTeachers(users: List<TeacherResponse>) {
+		binding.pb.visibility = View.GONE
+		userList = mutableListOf()
+		for (user in users) {
+			val newUser = User(
+				user.id,
+				user.mail,
+				user.name,
+				user.lastName,
+				null,
+				null,
+				null,
+				user.image,
+				user.type,
+				null,
+				null,
+			)
+			userList.add(newUser)
+		}
+		filterList = userList.toMutableList()
+		filtersTeachers()
+	}
+
+	//Filtra los profesores segun el nombre y apellido
+	private fun filtersTeachers() {
+		if (userList.isEmpty()) return
+
+		if (binding.etSearch.text.isNotEmpty()) {
+			//Filtra los profesores de uno en uno
+			filterList = userList.filter { user ->
+
+				val nameLastName = "${user.name} ${user.lastName}"
+
+				//Comprueba si el editText contiene el nombre y apellido del profesor
+				//Si lo contiene devuelve true y lo mete en la lista filtrada
+				//Si no devuelve false y lo descarta
+				nameLastName.lowercase().contains(binding.etSearch.text.toString().lowercase())
+
+			}.toMutableList()
+			userAdapter.updateList(filterList)
+		} else {
+			userAdapter.updateList(userList)
+		}
+	}
+
+
+	//Enseña el progressBar mientras carga los datos
 	private fun loadingState() {
-		//dibujar loading
 		binding.pb.visibility = View.VISIBLE
 	}
 
+	//Si da error quita el progressBar y muestra el error por consola
 	private fun errorState(error: String) {
 		//error message
 		Log.i("Scheduleeeeeeeeeeeeeee", error)
@@ -238,10 +290,14 @@ class UserFragment : Fragment() {
 				binding.clFilter.visibility = View.VISIBLE
 				alumViewModel.getAlums(user.userID)
 				cyclesViewModel.getCycles()
+				initUIStateAlums()
+				initUIStateCycles()
 			}
 			4 -> {
 				binding.llSearch.visibility = View.VISIBLE
 				binding.clFilter.visibility = View.GONE
+				teacherViewModel.getTeachers()
+				initUIStateTeachers()
 			}
 		}
 	}
@@ -252,26 +308,43 @@ class UserFragment : Fragment() {
 		userAdapter = UserAdapter(onItemSelected = {onItemSelected(it)})
 		binding.rvUsers.layoutManager = GridLayoutManager(context,1)
 		binding.rvUsers.adapter = userAdapter
+
+		binding.etSearch.addTextChangedListener {
+			filtersTeachers()
+		}
 	}
 
 
 
-	/* --- Cuando clicas en un usuario ejcuta esto y muestra los detalles en un dialog --- */
+	/* --- Cuando clicas muestra un dialog con informacion que depende del tipo de usuario --- */
 	@SuppressLint("SetTextI18n")
 	private fun onItemSelected(user: User) {
-		val userDetailsBinding = ActivityUserDetailsBinding.inflate(layoutInflater)
+		when(user.type.id) {
+			3 -> {
+				//Tipo de usuario seleccionado: Profesor
+				//Muestra un dialog con los horarios del profesor
+			}
+			4 -> {
+				//Tipo de usuario seleccionado: Alumno
+				//Muestra un dialog con la informacion del alumno
+				//Nombre, Apellidos, Curso, Ciclo y foto de perfil de tenerla
+				val userDetailsBinding = ActivityUserDetailsBinding.inflate(layoutInflater)
 
-		val dialog = Dialog(requireContext())
-		dialog.setContentView(userDetailsBinding.root)
-		dialog.show()
+				val dialog = Dialog(requireContext())
+				dialog.setContentView(userDetailsBinding.root)
+				dialog.show()
 
-		userDetailsBinding.tvUsername.text = "${user.name} ${user.lastName}\n${user.semester} ${user.cycle?.name}"
-		Glide.with(this)
-			.load(user.argazkiaUrl)
-			.placeholder(R.drawable.profile_placeholder)
-			.error(R.drawable.profile_placeholder)
-			.circleCrop()
-			.into(userDetailsBinding.ivUserImg)
+				Glide.with(this)
+					.load(user.argazkiaUrl)
+					.placeholder(R.drawable.profile_placeholder)
+					.error(R.drawable.profile_placeholder)
+					.circleCrop()
+					.into(userDetailsBinding.ivUserImg)
+				userDetailsBinding.tvUsername.text = "${user.name} ${user.lastName}\n${user.semester} ${user.cycle?.name}"
+			}
+		}
+
+
 	}
 
 	override fun onCreateView(

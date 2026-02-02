@@ -31,6 +31,7 @@
             android:contentDescription="@string/description"/>
 
         <EditText
+            android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="@string/search"
