@@ -40,10 +40,10 @@ class ProfileFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
-		initListeners()
 		initUser()
 		observeDarkMode()
 		observeLanguage()
+		initListeners()
 	}
 
 	@SuppressLint("SetTextI18n")
@@ -66,10 +66,8 @@ class ProfileFragment : Fragment() {
 	private fun initUser() {
 		sharedViewModel.user.observe(viewLifecycleOwner) { user ->
 			this.user = user
-			Log.i("USER", "aaaaaaaaaaaaa"+user.name)
 			initUI()
 		}
-		Log.i("USER", "eeeeeeeeeeeeee")
 	}
 
 	//Cuando seleccionas el idioma cambia el color del texto para destacarlo
@@ -95,22 +93,30 @@ class ProfileFragment : Fragment() {
 			requireContext().dataStore.data
 				.map { it[DARK_MODE_KEY] ?: false }
 				.collect { isDarkMode ->
-
-					// Evita que el listener se dispare solo
+					// Solo actualizamos el estado visual del Switch sin disparar el listener
 					binding.swDarkMode.setOnCheckedChangeListener(null)
 					binding.swDarkMode.isChecked = isDarkMode
 
-					//Comprueba si el usuario tenia el darkmode activado
-					//y lo activa de ser asi
-					AppCompatDelegate.setDefaultNightMode(
-						if (isDarkMode)
-							AppCompatDelegate.MODE_NIGHT_YES
-						else
-							AppCompatDelegate.MODE_NIGHT_NO
-					)
+					// IMPORTANTE: Solo llamar a setDefaultNightMode si el modo actual es distinto
+					val currentMode = AppCompatDelegate.getDefaultNightMode()
+					val expectedMode = if (isDarkMode) AppCompatDelegate.MODE_NIGHT_YES else AppCompatDelegate.MODE_NIGHT_NO
 
-					initListeners()
+					if (currentMode != expectedMode) {
+						AppCompatDelegate.setDefaultNightMode(expectedMode)
+					}
+
+					// Volvemos a poner el listener después de actualizar el estado visual
+					setupDarkModeListener()
 				}
+		}
+	}
+
+	private fun setupDarkModeListener() {
+		binding.swDarkMode.setOnCheckedChangeListener { _, isChecked ->
+			viewLifecycleOwner.lifecycleScope.launch {
+				saveDarkMode(isChecked)
+				// Al guardar, el collect de observeDarkMode se encargará de aplicar el modo
+			}
 		}
 	}
 
@@ -159,7 +165,9 @@ class ProfileFragment : Fragment() {
 		//Vuelve al login
 		binding.btnLogout.setOnClickListener {
 			val intent = Intent(requireContext(), MainActivity::class.java)
+			intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
 			startActivity(intent)
+			activity?.finish()
 		}
 	}
 

@@ -28,7 +28,7 @@
         android:id="@+id/ivLogo"
         android:layout_width="300dp"
         android:layout_height="150dp"
-        android:src="@drawable/logo_elorrieta"
+        android:src="@drawable/imagotipo_elorrieta"
         android:padding="16dp"
         android:background="@drawable/bg_edittext"
         android:layout_marginTop="32dp"

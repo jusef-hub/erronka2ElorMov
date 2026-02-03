@@ -53,6 +53,10 @@ class ScheduleFragment : Fragment() {
 	}
 
 	private fun successState(schedule: List<ScheduleResponse>) {
+		binding.pb.visibility = View.GONE
+		binding.horizontalScroll.visibility = View.VISIBLE
+		binding.tvError.visibility = View.GONE
+
 		val scheduleTable = convertSchedule(schedule)
 		createScheduleTable(scheduleTable)
 	}
@@ -80,9 +84,14 @@ class ScheduleFragment : Fragment() {
 	private fun loadingState() {
 		//dibujar loading
 		binding.pb.visibility = View.VISIBLE
+		binding.horizontalScroll.visibility = View.GONE
+		binding.tvError.visibility = View.GONE
 	}
 
 	private fun errorState(error: String) {
+		binding.pb.visibility = View.GONE
+		binding.horizontalScroll.visibility = View.GONE
+		binding.tvError.visibility = View.VISIBLE
 		//error message
 		Log.i("Scheduleeeeeeeeeeeeeee", error)
 	}

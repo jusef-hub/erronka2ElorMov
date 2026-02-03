@@ -46,4 +46,13 @@ interface ElorMovApiService {
 	@GET("api/profesores")
 
 	suspend fun getTeachers(): Response<List<TeacherResponse>>
+
+	// recoge los horarios atraves del tipo de usuario y su id
+	// desde de la consulta http://10.5.104.111:8080/api/horarios/{type}/{id}
+	@GET("api/reuniones/{type}/{id}")
+
+	suspend fun getMeetings(
+		@Path("type") type: String,
+		@Path("id") id: Int
+	): Response<List<ScheduleResponse>>
 }
