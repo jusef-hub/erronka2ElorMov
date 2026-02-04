@@ -3,6 +3,7 @@ package com.example.elormov.data.network
 import com.example.elormov.domain.model.LoginRequest
 import com.example.elormov.domain.model.CyclesResponse
 import com.example.elormov.domain.model.LoginResponse
+import com.example.elormov.domain.model.MeetingResponse
 import com.example.elormov.domain.model.ScheduleResponse
 import com.example.elormov.domain.model.TeacherResponse
 import com.example.elormov.domain.model.UserResponse
@@ -54,5 +55,5 @@ interface ElorMovApiService {
 	suspend fun getMeetings(
 		@Path("type") type: String,
 		@Path("id") id: Int
-	): Response<List<ScheduleResponse>>
+	): Response<List<MeetingResponse>>
 }

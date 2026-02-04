@@ -11,7 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.elormov.databinding.FragmentScheduleBinding
-import com.example.elormov.domain.model.Horario
+import com.example.elormov.domain.model.Schedule
 import com.example.elormov.domain.model.Modulo
 import com.example.elormov.domain.model.Profesor
 import com.example.elormov.domain.model.ScheduleResponse
@@ -63,13 +63,17 @@ class TeacherScheduleDialogFragment : DialogFragment() {
 	}
 
 	private fun successState(schedule: List<ScheduleResponse>) {
+		binding.pb.visibility = View.GONE
+		binding.horizontalScroll.visibility = View.VISIBLE
+		binding.tvError.visibility = View.GONE
+
 		val scheduleTable = convertSchedule(schedule)
 		createScheduleTable(scheduleTable)
 	}
 
-	private fun convertSchedule(schedule: List<ScheduleResponse>): List<Horario> {
+	private fun convertSchedule(schedule: List<ScheduleResponse>): List<Schedule> {
 		return schedule.map { item ->
-			Horario(
+			Schedule(
 				day = item.day,
 				hour = item.hour,
 				teacher = Profesor(name = item.teavherName.name),
@@ -82,7 +86,7 @@ class TeacherScheduleDialogFragment : DialogFragment() {
 	private fun loadingState() { binding.pb.visibility = View.VISIBLE }
 	private fun errorState(error: String) { binding.pb.visibility = View.GONE; Log.e("Schedule", error) }
 
-	private fun createScheduleTable(horarios: List<Horario>) {
+	private fun createScheduleTable(horarios: List<Schedule>) {
 		for (horario in horarios) {
 			when (horario.day) {
 				"LUNES" -> setCell(binding.cellMonday1, binding.cellMonday2, binding.cellMonday3, binding.cellMonday4, binding.cellMonday5, binding.cellMonday6, horario)
@@ -96,9 +100,9 @@ class TeacherScheduleDialogFragment : DialogFragment() {
 
 	private fun setCell(
 		c1: View, c2: View, c3: View, c4: View, c5: View, c6: View,
-		horario: Horario
+		horario: Schedule
 	) {
-		val text = "${horario.module.name}\n${horario.teacher.name}\n${horario.classRoom}"
+		val text = "${horario.module?.name}\n${horario.teacher.name}\n${horario.classRoom}"
 		when(horario.hour) {
 			1 -> (c1 as? android.widget.TextView)?.text = text
 			2 -> (c2 as? android.widget.TextView)?.text = text
