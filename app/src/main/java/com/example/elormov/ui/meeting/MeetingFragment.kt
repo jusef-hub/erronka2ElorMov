@@ -35,6 +35,7 @@ class MeetingFragment : Fragment() {
 	private val binding get() = _binding!!
 	private lateinit var user: User
 	private lateinit var sharedViewModel: SharedViewModel
+	private lateinit var tableMakerFunsMeet: TableMakerFunsMeet
 	private val scheduleViewModel: ScheduleViewModel by viewModels()
 	private val meetingViewModel: MeetingViewModel by viewModels()
 
@@ -47,6 +48,7 @@ class MeetingFragment : Fragment() {
 	override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 		super.onViewCreated(view, savedInstanceState)
 		sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+		tableMakerFunsMeet = TableMakerFunsMeet(binding)
 		initUser()
 		initUIStateSchedule()
 		initUIStateMeeting()
